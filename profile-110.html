@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemudix - Profile Web</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+        body { 
+            background-color: #FBF9F1; color: #4C5958; 
+            display: flex; flex-direction: column; min-height: 100vh; 
+        }
+
+        header {
+            background-color: #88AB8E; color: white; padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 999; box-shadow: 0 4px 15px rgba(136, 171, 142, 0.2);
+        }
+        header h1 { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
+        nav { display: flex; gap: 25px; }
+        nav a {
+            color: rgba(255, 255, 255, 0.85); text-decoration: none;
+            font-weight: 600; font-size: 16px; transition: 0.3s; padding-bottom: 5px;
+        }
+        nav a:hover, nav a.active-nav { color: #ffffff; border-bottom: 2px solid white; }
+
+        .aesthetic-section {
+            background-color: #F2EFE5; padding: 80px 8%; text-align: center;
+            flex: 1; animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title { font-size: 34px; font-weight: 800; margin-bottom: 20px; color: #2C3E35; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        
+        .portfolio-card {
+            background: #ffffff; padding: 35px 30px; border-radius: 16px; 
+            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1); text-align: left; 
+            transition: all 0.4s ease; border-top: 5px solid #88AB8E;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .portfolio-card:hover { transform: translateY(-12px); box-shadow: 0 15px 35px rgba(136, 171, 142, 0.2); }
+        .portfolio-card h4 { font-size: 22px; margin-bottom: 12px; color: #2C3E35; }
+        
+        /* --- PERUBAHAN: Menambahkan text-align: justify agar deskripsi rapi --- */
+        .portfolio-card p { color: #697A76; font-size: 15px; line-height: 1.6; text-align: justify; }
+
+        /* --- STYLE BARU: Tombol Detail dengan Efek Hover Terbalik --- */
+        .btn-detail {
+            display: block; width: 100%; padding: 12px; margin-top: 20px;
+            background-color: #88AB8E; color: #ffffff; border: 2px solid #88AB8E;
+            border-radius: 10px; font-weight: 800; font-size: 15px; cursor: pointer;
+            transition: all 0.3s ease; text-align: center;
+        }
+        .btn-detail:hover {
+            background-color: #ffffff; color: #88AB8E;
+        }
+
+        /* --- STYLE BARU: Pop-up Modal --- */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        
+        .modal-content {
+            background-color: #ffffff; padding: 35px; border-radius: 20px;
+            width: 90%; max-width: 450px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            position: relative; text-align: left; border-top: 8px solid #88AB8E;
+            transform: translateY(-30px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.show .modal-content { transform: translateY(0); }
+        
+        .close-btn {
+            position: absolute; top: 15px; right: 20px; font-size: 28px;
+            font-weight: bold; color: #697A76; cursor: pointer; transition: 0.2s;
+        }
+        .close-btn:hover { color: #2C3E35; }
+        .modal-title { font-size: 26px; color: #2C3E35; margin-bottom: 20px; font-weight: 800; }
+        .modal-item { font-size: 16px; margin-bottom: 12px; color: #4C5958; line-height: 1.5; }
+        .modal-item b { color: #2C3E35; }
+
+        footer {
+            background-color: #EEE7DA; color: #697A76; text-align: center;
+            padding: 20px; font-weight: 600; font-size: 15px; letter-spacing: 0.5px;
+            width: 100%; margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kemudix</h1>
+        <nav>
+            <a href="home-110.html">Beranda</a>
+            <a href="profile-110.html" class="active-nav">Profile</a>
+            <a href="transaksi-110.html">Transaksi</a>
+            <a href="index.html">Login</a>
+        </nav>
+    </header>
+
+    <div class="aesthetic-section">
+    <h1 class="section-title" style="margin-bottom: 10px;">Kemudix</h1>
+    <p style="color: #1A3636; font-weight: bold; font-size: 22px; margin-bottom: 15px; text-align: center;">Aplikasi Web Rental Mobil</p>
+    <p style="color: #697A76; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; font-size: 17px; text-align: justify;">
+    Aplikasi <b>Kemudix</b> ini dirancang sebagai proyek akhir untuk mempermudah manajemen transaksi penyewaan mobil. Sistem ini memungkinkan pencatatan jenis Mobil, Durasi Penyewaan, serta Kalkulasi Biaya secara otomatis.
+    </p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div>
+                    <img src="Assets/Toyota Avanza.jpg" alt="Toyota Avanza" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                    <h4>Toyota Avanza</h4>
+                    <p><b>Deskripsi</b><br>MPV Keluarga berkapasitas 7 penumpang. Sangat cocok untuk perjalanan liburan keluarga, mudik, atau perjalanan luar kota dengan efisiensi bahan bakar yang hemat.</p>
+                </div>
+                <button class="btn-detail" data-nama="Toyota Avanza" data-warna="Hitam, Silver, Putih" data-harga="Rp 350.000 / hari">Detail</button>
+            </div>
+            
+            <div class="portfolio-card">
+                <div>
+                    <img src="Assets/Honda Brio.jpg" alt="Honda Brio" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                    <h4>Honda Brio</h4>
+                    <p><b>Deskripsi</b><br>City Car / Hatchback (5 penumpang). Lincah dan hemat bensin, sangat ideal untuk mobilitas tinggi di jalanan perkotaan yang padat atau perjalanan singkat.</p>
+                </div>
+                <button class="btn-detail" data-nama="Honda Brio" data-warna="Hitam, Silver, Putih" data-harga="Rp 250.000 / hari">Detail</button>
+            </div>
+            
+            <div class="portfolio-card">
+                <div>
+                    <img src="Assets/Mitsubisi Pajero.jpg" alt="Mitsubishi Pajero" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                    <h4>Mitsubishi Pajero</h4>
+                    <p><b>Deskripsi</b><br> SUV Premium (7 penumpang). Tangguh dan mewah. Cocok untuk perjalanan jauh, medan jalan yang bervariasi (off-road ringan), hingga keperluan bisnis VIP.</p>
+                </div>
+                <button class="btn-detail" data-nama="Mitsubishi Pajero" data-warna="Hitam, Silver, Putih" data-harga="Rp 900.000 / hari">Detail</button>
+            </div>
+            
+            <div class="portfolio-card">
+                <div>
+                    <img src="Assets/Toyota Kijang Inova.jpg" alt="Toyota Kijang Innova" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                    <h4>Toyota Kijang Innova</h4>
+                    <p><b>Deskripsi</b><br>Medium MPV (7 penumpang). Menawarkan kabin yang luas dan suspensi sangat nyaman. Pilihan terbaik untuk perjalanan bisnis luar kota atau libisan keluarga ekstra nyaman.</p>
+                </div>
+                <button class="btn-detail" data-nama="Toyota Kijang Innova" data-warna="Hitam, Silver, Putih" data-harga="Rp 500.000 / hari">Detail</button>
+            </div>
+            
+            <div class="portfolio-card">
+                <div>
+                    <img src="Assets/Nissan Livina.jpg" alt="Nissan Livina" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                    <h4>Nissan Livina</h4>
+                    <p><b>Deskripsi</b><br>MPV (7 penumpang). Dikenal dengan kenyamanan mengemudi bak sedan. Cocok untuk jalan-jalan santai keluarga di akhir pekan dengan bantingan suspensi yang empuk.</p>
+                </div>
+                <button class="btn-detail" data-nama="Nissan Livina" data-warna="Hitam, Silver, Putih" data-harga="Rp 350.000 / hari">Detail</button>
+            </div>
+            
+            <div class="portfolio-card">
+                <div>
+                    <img src="Assets/Honda Civic.jpg" alt="Honda Civic" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                    <h4>Honda Civic</h4>
+                    <p><b>Deskripsi</b><br>Sedan Sport / Mewah (5 penumpang). Desain aerodinamis dan elegan. Pilihan pas untuk acara pernikahan (wedding car), meeting eksekutif, atau berkendara dengan gaya.</p>
+                </div>
+                <button class="btn-detail" data-nama="Honda Civic" data-warna="Hitam, Silver, Putih" data-harga="Rp 800.000 / hari">Detail</button>
+            </div>
+        </div> 
+    </div> 
+
+    <div id="carModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h3 class="modal-title" id="modalCarName">Nama Mobil</h3>
+            <p class="modal-item"><b>Warna Tersedia :</b> <span id="modalCarColors"></span></p>
+            <p class="modal-item"><b>Harga Sewa :</b> <span id="modalCarPrice" style="color: #88AB8E; font-weight: bold;"></span></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Muhammad Aditya Nugraha Pratama | 251011750110</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('carModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        const modalName = document.getElementById('modalCarName');
+        const modalColors = document.getElementById('modalCarColors');
+        const modalPrice = document.getElementById('modalCarPrice');
+
+        // Menangkap event klik pada semua tombol detail
+        document.querySelectorAll('.btn-detail').forEach(button => {
+            button.addEventListener('click', () => {
+                // Mengambil data dari atribut tombol yang diklik
+                const name = button.getAttribute('data-nama');
+                const colors = button.getAttribute('data-warna');
+                const price = button.getAttribute('data-harga');
+
+                // Mengisi data ke dalam elemen pop-up
+                modalName.innerText = name;
+                modalColors.innerText = colors;
+                modalPrice.innerText = price;
+
+                // Menampilkan pop-up
+                modal.classList.add('show');
+            });
+        });
+
+        // Menutup pop-up saat tombol 'X' diklik
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        // Menutup pop-up jika pengguna mengklik area luar kotak modal
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

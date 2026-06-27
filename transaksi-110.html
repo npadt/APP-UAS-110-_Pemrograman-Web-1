@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemudix - Transaksi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+        body { background-color: #FBF9F1; color: #4C5958; display: flex; flex-direction: column; min-height: 100vh; }
+
+        header {
+            background-color: #88AB8E; color: white; padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 999; box-shadow: 0 4px 15px rgba(136, 171, 142, 0.2);
+        }
+        header h1 { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
+        nav { display: flex; gap: 25px; }
+        nav a {
+            color: rgba(255, 255, 255, 0.85); text-decoration: none;
+            font-weight: 600; font-size: 16px; transition: 0.3s; padding-bottom: 5px;
+        }
+        nav a:hover, nav a.active-nav { color: #ffffff; border-bottom: 2px solid white; }
+
+        .content-section {
+            padding: 60px 8%; flex: 1; animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title { font-size: 34px; font-weight: 800; margin-bottom: 35px; color: #2C3E35; text-align: center;}
+        
+        .form-container { 
+            max-width: 600px; margin: 0 auto; background: #ffffff; padding: 40px; 
+            border-radius: 16px; box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1); 
+        }
+        .form-group { margin-bottom: 22px; }
+        label { display: block; font-weight: 700; margin-bottom: 10px; color: #2C3E35; }
+        input[type="text"], input[type="number"] {
+            width: 100%; padding: 14px 18px; border: 2px solid #EAECCC;
+            border-radius: 10px; font-size: 16px; outline: none; transition: 0.3s;
+            background-color: #FBF9F1; color: #4C5958;
+        }
+        input:focus { border-color: #88AB8E; background-color: #ffffff; box-shadow: 0 0 0 4px rgba(136, 171, 142, 0.15); }
+        
+        /* Bagian tombol yang dimodifikasi untuk efek warna terbalik */
+        .btn-primary {
+            background-color: #88AB8E; color: white; border: 2px solid #88AB8E; padding: 14px 30px;
+            font-size: 17px; font-weight: 700; border-radius: 10px; cursor: pointer;
+            transition: 0.3s; width: 100%; margin-top: 15px; box-shadow: 0 6px 15px rgba(136, 171, 142, 0.2);
+        }
+        .btn-primary:hover { 
+            background-color: white; 
+            color: #88AB8E; 
+            transform: translateY(-2px); 
+        }
+
+        .table-wrapper {
+            margin-top: 50px; background: #ffffff; border-radius: 16px;
+            padding: 25px; box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1); overflow-x: auto;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 18px; border-bottom: 1px solid #F2EFE5; text-align: left; }
+        th { background-color: #88AB8E; color: #ffffff; font-weight: 700; }
+        th:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+        th:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+        tbody tr:hover { background-color: #FBF9F1; transition: 0.2s; }
+
+        footer {
+            background-color: #EEE7DA; color: #697A76; text-align: center;
+            padding: 20px; font-weight: 600; font-size: 15px; letter-spacing: 0.5px; margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kemudix</h1>
+        <nav>
+            <a href="home-110.html">Beranda</a>
+            <a href="profile-110.html">Profile</a>
+            <a href="transaksi-110.html" class="active-nav">Transaksi</a>
+            <a href="index.html">Login</a>
+        </nav>
+    </header>
+
+    <div class="content-section">
+        <h2 class="section-title">Form Data Transaksi</h2>
+        
+        <div class="form-container">
+            <form id="formTransaksi">
+                <div class="form-group">
+                    <label>Pilih Mobil</label>
+                    <input type="text" id="namaMobil" list="saranMobil" placeholder="Masukkan jenis mobil">
+                    <datalist id="saranMobil">
+                        <option value="Toyota Avanza"></option>
+                        <option value="Honda Brio"></option>
+                        <option value="Mitsubishi Pajero"></option>
+                        <option value="Toyota Kijang Innova"></option>
+                        <option value="Nissan Livina"></option>
+                        <option value="Honda Civic"></option>
+                    </datalist>
+                </div>
+
+                <div class="form-group">
+                    <label>Pilih Warna</label>
+                    <input type="text" id="warnaMobil" list="saranWarna" placeholder="Masukkan warna mobil">
+                    <datalist id="saranWarna">
+                        <option value="Hitam"></option>
+                        <option value="Silver"></option>
+                        <option value="Putih"></option>
+                    </datalist>
+                </div>
+
+                <div class="form-group">
+                    <label>Lama Sewa (Hari)</label>
+                    <input type="number" id="lamaSewa" placeholder="Contoh: 3">
+                </div>
+
+                <div class="form-group">
+                    <label>Harga per Hari (Rp)</label>
+                    <input type="number" id="hargaSewa" placeholder="Contoh: 350000">
+                </div>
+
+                <button type="button" class="btn-primary" onclick="tambahTransaksi()">Simpan Transaksi</button>
+            </form>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabelTransaksi">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Mobil</th>
+                        <th>Warna</th> <th>Lama Sewa</th>
+                        <th>Harga per Hari</th>
+                        <th>Total Biaya</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Muhammad Aditya Nugraha Pratama | 251011750110</p>
+    </footer>
+
+    <script>
+        let nomorUrut = 1;
+
+        function tambahTransaksi() {
+            const mobil = document.getElementById('namaMobil').value;
+            const warna = document.getElementById('warnaMobil').value; 
+            const durasi = document.getElementById('lamaSewa').value;
+            const harga = document.getElementById('hargaSewa').value;
+
+            if (mobil === "" || warna === "" || durasi === "" || harga === "") {
+                alert("Peringatan: Seluruh form transaksi (termasuk warna) harus diisi!");
+                return;
+            }
+
+            const totalHarga = parseInt(durasi) * parseInt(harga);
+            const tabelBody = document.getElementById('tabelTransaksi').getElementsByTagName('tbody')[0];
+            const barisBaru = tabelBody.insertRow();
+
+            barisBaru.insertCell(0).innerText = nomorUrut++;
+            barisBaru.insertCell(1).innerText = mobil;
+            barisBaru.insertCell(2).innerText = warna; 
+            barisBaru.insertCell(3).innerText = durasi + " Hari";
+            barisBaru.insertCell(4).innerText = "Rp " + parseInt(harga).toLocaleString('id-ID');
+            barisBaru.insertCell(5).innerText = "Rp " + totalHarga.toLocaleString('id-ID');
+
+            document.getElementById('formTransaksi').reset();
+            alert("Berhasil: Data transaksi penyewaan " + mobil + " (" + warna + ") telah ditambahkan.");
+        }
+    </script>
+</body>
+</html>

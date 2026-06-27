@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemudix - Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+        body { background-color: #FBF9F1; color: #4C5958; display: flex; flex-direction: column; min-height: 100vh; }
+
+        header {
+            background-color: #88AB8E; color: white; padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 999; box-shadow: 0 4px 15px rgba(136, 171, 142, 0.2);
+        }
+        header h1 { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
+        nav { display: flex; gap: 25px; }
+        nav a {
+            color: rgba(255, 255, 255, 0.85); text-decoration: none;
+            font-weight: 600; font-size: 16px; transition: 0.3s; padding-bottom: 5px;
+        }
+        nav a:hover, nav a.active-nav { color: #ffffff; border-bottom: 2px solid white; }
+
+        .login-section {
+            padding: 80px 8%; flex: 1; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title { font-size: 34px; font-weight: 800; margin-bottom: 30px; color: #2C3E35; }
+        
+        .form-container {
+            width: 100%; max-width: 450px; background: #ffffff;
+            padding: 50px 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(149, 157, 165, 0.15);
+            text-align: left;
+        }
+        .form-group { margin-bottom: 22px; }
+        label { display: block; font-weight: 700; margin-bottom: 10px; color: #2C3E35; }
+        input[type="text"], input[type="password"] {
+            width: 100%; padding: 14px 18px; border: 2px solid #EAECCC;
+            border-radius: 10px; font-size: 16px; outline: none; transition: 0.3s;
+            background-color: #FBF9F1; color: #4C5958;
+        }
+        input:focus { border-color: #88AB8E; background-color: #ffffff; box-shadow: 0 0 0 4px rgba(136, 171, 142, 0.15); }
+        
+        /* Bagian tombol yang dimodifikasi untuk efek warna terbalik */
+        .btn-primary {
+            background-color: #88AB8E; color: white; border: 2px solid #88AB8E; padding: 15px 30px;
+            font-size: 17px; font-weight: 700; border-radius: 10px; cursor: pointer;
+            transition: 0.3s; width: 100%; margin-top: 25px; box-shadow: 0 6px 15px rgba(136, 171, 142, 0.2);
+        }
+        .btn-primary:hover { 
+            background-color: white; 
+            color: #88AB8E; 
+            transform: translateY(-2px); 
+        }
+
+        footer {
+            background-color: #EEE7DA; color: #697A76; text-align: center;
+            padding: 20px; font-weight: 600; font-size: 15px; letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kemudix</h1>
+        <nav>
+            <a href="home-110.html">Beranda</a>
+            <a href="profile-110.html">Profile</a>
+            <a href="transaksi-110.html">Transaksi</a>
+            <a href="index.html" class="active-nav">Login</a>
+        </nav>
+    </header>
+
+    <div class="login-section">
+        <h2 class="section-title">Login</h2>
+        
+        <div class="form-container">
+            <form id="formLogin">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password">
+                </div>
+
+                <button type="button" class="btn-primary" onclick="validasiLogin()">Masuk</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Muhammad Aditya Nugraha Pratama | 251011750110</p>
+    </footer>
+
+    <script>
+        function validasiLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            if (user === "" || pass === "") {
+                alert("Akses Ditolak: Username dan Password tidak boleh kosong!");
+            } else {
+                alert("Login Berhasil! Selamat datang, " + user + ".");
+                window.location.href = "home-110.html"; 
+                document.getElementById('formLogin').reset();
+            }
+        }
+    </script>
+</body>
+</html>
